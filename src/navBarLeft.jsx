@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import SearchIcon from "@mui/icons-material/Search";
-
+import DraftsIcon from "@mui/icons-material/Drafts";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import MailIcon from "@mui/icons-material/Mail";
 import PhoneIcon from "@mui/icons-material/Phone";
@@ -20,6 +20,7 @@ import PhoneIcon from "@mui/icons-material/Phone";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import TelegramIcon from "@mui/icons-material/Telegram";
+import { Email } from "@mui/icons-material";
 //import SkypeIcon from "@mui/icons-material/Skype";
 
 export default function NavBarLeft({ opennavBarLeft, setnavBarLeft }) {
@@ -27,19 +28,28 @@ export default function NavBarLeft({ opennavBarLeft, setnavBarLeft }) {
   return (
     <Stack
       sx={{
-        position: "fixed",
-        width: opennavBarLeft == "0" ? "0" : "100%",
-        height: "100vh",
         zIndex: "100000000",
+        position: "fixed",
+        direction: "ltr",
+        height: "100vh",
         top: 0,
-        justifyContent:"flex-start"
+        width: opennavBarLeft == "0" ? "0" : "100%",
+        backgroundColor: "#221f3fe0",
+        transition: "width 0s ease",
+        justifyContent: "flex-start",
+        direction: "ltr",
       }}
     >
       {/*<ClickAwayListener onClickAway={() => setnavBarLeft("0")}>*/}
       <Box
         sx={{
           zIndex: "100000000",
-          width: opennavBarLeft,
+          width: {
+            xs: opennavBarLeft == "0" ? "0" : opennavBarLeft,
+            sm: opennavBarLeft == "0" ? "0" : "300px",
+            md: opennavBarLeft == "0" ? "0" : "350px",
+            lg: opennavBarLeft == "0" ? "0" : "400px",
+          },
           background: "white",
           padding: opennavBarLeft == "0" ? "0" : "30px 40px",
           borderRadius: "20px",
@@ -49,7 +59,7 @@ export default function NavBarLeft({ opennavBarLeft, setnavBarLeft }) {
           overflowY: "auto",
           height: "90vh",
           top: "20px",
-          right: "20px",
+          left: "20px",
           scrollbarWidth: "none",
           "&::-webkit-scrollbar": {
             display: "none",
@@ -342,47 +352,145 @@ export default function NavBarLeft({ opennavBarLeft, setnavBarLeft }) {
         </div>
         <Divider sx={{ my: 3 }} />
         {/* Contact Section */}
-        <Typography variant="h6" sx={{ fontWeight: 400, mb: 2 }}>
+        <Typography sx={{ mb: "15px", fontSize: "23px", fontWeight: "bold" }}>
           Contact Us
         </Typography>
-        <Stack spacing={2}>
-          <Stack direction="row" spacing={2} alignItems="center">
-            <LocationOnIcon sx={{ color: "#2d2a4a" }} />
-            <Typography sx={{ fontSize: "15px", fontWeight: "400" }}>
+        <Stack spacing={2} sx={{ mb: "15px" }}>
+          <Stack direction="row" spacing={1} alignItems="center">
+            <Stack
+              sx={{
+                background: "#221f3f",
+                borderRadius: "5px",
+                p: "5px",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <LocationOnIcon sx={{ color: "white", fontSize: "17px" }} />
+            </Stack>
+            <Typography
+              sx={{ color: "#6b6b76", fontSize: "14px", fontWeight: "400" }}
+            >
               27 Division St, New York, United States
             </Typography>
           </Stack>
-          <Stack direction="row" spacing={2} alignItems="center">
-            <MailIcon sx={{ color: "#2d2a4a" }} />
-            <Typography sx={{ fontSize: "15px", fontWeight: "400" }}>
+          <Stack direction="row" spacing={1} alignItems="center">
+            <Stack
+              sx={{
+                background: "#221f3f",
+                borderRadius: "5px",
+                p: "5px",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Email sx={{ color: "white", fontSize: "17px" }} />
+            </Stack>
+            <Typography
+              sx={{ color: "#6b6b76", fontSize: "14px", fontWeight: "400" }}
+            >
               Salebot7iquid@gmail.com
             </Typography>
           </Stack>
-          <Stack direction="row" spacing={2} alignItems="center">
-            <PhoneIcon sx={{ color: "#2d2a4a" }} />
-            <Typography sx={{ fontSize: "15px", fontWeight: "400" }}>
-              Call Us:{" "}
-              <Box component="span" sx={{ color: "#6c63a8" }}>
-                8 800 2563 123
-              </Box>
+          <Stack direction="row" spacing={1} alignItems="center">
+            <Stack
+              sx={{
+                background: "#221f3f",
+                borderRadius: "5px",
+                p: "5px",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <PhoneIcon sx={{ color: "white", fontSize: "17px" }} />
+            </Stack>
+            <Typography
+              sx={{ color: "#6b6b76", fontSize: "14px", fontWeight: "400" }}
+            >
+              Call Us: <span style={{ color: "#6565b7" }}>8 800 2563 123</span>
             </Typography>
           </Stack>
         </Stack>
         {/* Social Icons */}
-        <Stack direction="row" spacing={2} mt={4}>
-          {[FacebookIcon, TwitterIcon, TelegramIcon].map((Icon, index) => (
-            <IconButton
-              key={index}
-              sx={{
-                border: "1px solid #ddd",
-                color: "#6c63a8",
-                width: 40,
-                height: 40,
-              }}
-            >
-              <Icon />
-            </IconButton>
-          ))}
+        <Stack direction="row" spacing={2} mt={4} sx={{ mb: "15px" }}>
+          <IconButton
+            sx={{
+              border: "1px solid #d6d6e0",
+              color: "#6c63a8",
+              width: 45,
+              height: 45,
+              "@keyframes pulse": {
+                "0%": {
+                  transform: "scale(1)",
+                },
+                "50%": {
+                  transform: "scale(1.2)",
+                },
+                "100%": {
+                  transform: "scale(1)",
+                },
+              },
+              "&:hover": {
+                backgroundColor: "#ffae00",
+                color: "#fff",
+                animation: "pulse 0.8s ease-in-out infinite",
+              },
+            }}
+          >
+            <FacebookIcon />
+          </IconButton>
+          <IconButton
+            sx={{
+              border: "1px solid #d6d6e0",
+              color: "#6c63a8",
+              width: 45,
+              height: 45,
+              "@keyframes pulse": {
+                "0%": {
+                  transform: "scale(1)",
+                },
+                "50%": {
+                  transform: "scale(1.2)",
+                },
+                "100%": {
+                  transform: "scale(1)",
+                },
+              },
+              "&:hover": {
+                backgroundColor: "#ffae00",
+                color: "#fff",
+                animation: "pulse 0.8s ease-in-out infinite",
+              },
+            }}
+          >
+            <TwitterIcon />
+          </IconButton>
+          <IconButton
+            sx={{
+              border: "1px solid #d6d6e0",
+              color: "#6c63a8",
+              width: 45,
+              height: 45,
+              "@keyframes pulse": {
+                "0%": {
+                  transform: "scale(1)",
+                },
+                "50%": {
+                  transform: "scale(1.2)",
+                },
+                "100%": {
+                  transform: "scale(1)",
+                },
+              },
+              "&:hover": {
+                backgroundColor: "#ffae00",
+                color: "#fff",
+                animation: "pulse 0.8s ease-in-out infinite",
+              },
+            }}
+          >
+            <TelegramIcon />
+          </IconButton>
         </Stack>
       </Box>
       {/*</ClickAwayListener>*/}

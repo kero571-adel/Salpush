@@ -6,7 +6,7 @@ import Menu from "@mui/material/Menu";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
-
+import { useState, useEffect } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 const StyledMenu = styled((props) => (
   <Menu
@@ -48,16 +48,25 @@ const StyledMenu = styled((props) => (
   },
 }));
 export default function Nav({ setOpenSearch, setNavBarRight, setnavBarLeft }) {
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 0);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
   const theme = useTheme();
-  const isMobile =
-    useMediaQuery(theme.breakpoints.only("xs")) ||
-    useMediaQuery(theme.breakpoints.only("sm")) ||
-    useMediaQuery(theme.breakpoints.only("md"));
+  const isMobile = useMediaQuery(theme.breakpoints.down("lg"));
   function handleMenuClick() {
     if (isMobile) {
-      setnavBarLeft("250px");
+      setnavBarLeft("280px");
     } else {
-      setNavBarRight("250px");
+      setNavBarRight("450px");
     }
   }
 
@@ -69,20 +78,22 @@ export default function Nav({ setOpenSearch, setNavBarRight, setnavBarLeft }) {
           justifyContent: "space-between",
           alignItems: "center",
           padding: "20px 42px",
-          position: "sticky",
-          top: 10,
+          position: "fixed",
+          top: scrolled ? "0" : "30px",
           zIndex: 999,
           backgroundColor: "white",
           borderRadius: "20px",
-          margin: "auto",
+          width: "98%",
+          left: "50%",
+          transform: "translateX(-50%)",
           boxShadow: "2px 2px 54px 12px #f1f1f1",
         }}
       >
         {/*logo */}
-        <Box>
+        <Box sx={{ marginRight: { xs: "10px", md: "60px" } }}>
           <img
             src="/Salepush – SEO & Digital Marketing Theme_files/logo-1.png"
-            style={{ width: "190px", marginRight: "20px" }}
+            style={{ width: "190px" }}
           />
         </Box>
         {/**links */}
@@ -103,7 +114,7 @@ export default function Nav({ setOpenSearch, setNavBarRight, setnavBarLeft }) {
               },
 
               "&:hover .arrow-icon": {
-                transform: "rotate(180deg)",
+                transform: "rotateX(180deg)",
               },
               "&:hover button::after": {
                 transform: "scaleX(1)",
@@ -125,17 +136,17 @@ export default function Nav({ setOpenSearch, setNavBarRight, setnavBarLeft }) {
                   left: 0,
                   bottom: -4,
                   width: "100%",
-                  height: "4px",
+                  height: "3px",
                   backgroundImage:
                     "linear-gradient(45deg, #f7931e, #d63384, #6f42c1)",
-                  transform: "scaleX(0)",
+                  // transform: "scaleX(0)",
                   transformOrigin: "left",
                   transition: "transform 0.3s ease",
                 },
 
-                "&:hover::after": {
-                  transform: "scaleX(1)",
-                },
+                // "&:hover::after": {
+                //   // transform: "scaleX(1)",
+                // },
               }}
               endIcon={
                 <KeyboardArrowDownIcon
@@ -156,12 +167,12 @@ export default function Nav({ setOpenSearch, setNavBarRight, setnavBarLeft }) {
                 position: "absolute",
                 top: "100%",
                 left: 0,
-                minWidth: "180px",
+                minWidth: "225px",
                 marginTop: "30px",
                 backgroundColor: "white",
                 borderRadius: "10px",
                 boxShadow: "0px 10px 30px rgba(0,0,0,0.1)",
-                padding: "10px 0",
+                padding: "10px 0 10px 15px",
                 opacity: 0,
                 visibility: "hidden",
                 transform: "translateY(10px)",
@@ -200,20 +211,22 @@ export default function Nav({ setOpenSearch, setNavBarRight, setnavBarLeft }) {
                     <CircleIcon
                       sx={{
                         fontSize: "6px",
-                        color: "purple",
+                        color: "#6565b7",
                         transform: "translateY(-3.5px)",
                       }}
                     />
                     <CircleIcon
                       sx={{
                         fontSize: "6px",
-                        color: "#6f42c1",
+                        color: "#6565b7",
                         transform: "translateY(-3.5px)",
                       }}
                     />
                   </Stack>
                   <Typography
+
                     sx={{
+                      color:i==0?"#ffae00":"black",
                       "&:hover": { color: "#ffae00" },
                     }}
                   >
@@ -235,7 +248,7 @@ export default function Nav({ setOpenSearch, setNavBarRight, setnavBarLeft }) {
               },
 
               "&:hover .arrow-icon": {
-                transform: "rotate(180deg)",
+                transform: "rotateX(180deg)",
               },
               "&:hover button::after": {
                 transform: "scaleX(1)",
@@ -257,7 +270,7 @@ export default function Nav({ setOpenSearch, setNavBarRight, setnavBarLeft }) {
                   left: 0,
                   bottom: -4,
                   width: "100%",
-                  height: "4px",
+                  height: "3px",
                   backgroundImage:
                     "linear-gradient(45deg, #f7931e, #d63384, #6f42c1)",
                   transform: "scaleX(0)",
@@ -288,12 +301,12 @@ export default function Nav({ setOpenSearch, setNavBarRight, setnavBarLeft }) {
                 position: "absolute",
                 top: "100%",
                 left: 0,
-                minWidth: "180px",
+                minWidth: "225px",
                 marginTop: "30px",
                 backgroundColor: "white",
                 borderRadius: "10px",
                 boxShadow: "0px 10px 30px rgba(0,0,0,0.1)",
-                padding: "10px 0",
+                padding: "10px 0 10px 15px",
                 opacity: 0,
                 visibility: "hidden",
                 transform: "translateY(10px)",
@@ -333,14 +346,14 @@ export default function Nav({ setOpenSearch, setNavBarRight, setnavBarLeft }) {
                     <CircleIcon
                       sx={{
                         fontSize: "6px",
-                        color: "purple",
+                        color: "#6565b7",
                         transform: "translateY(-3.5px)",
                       }}
                     />
                     <CircleIcon
                       sx={{
                         fontSize: "6px",
-                        color: "#6f42c1",
+                        color: "#6565b7",
                         transform: "translateY(-3.5px)",
                       }}
                     />
@@ -368,7 +381,7 @@ export default function Nav({ setOpenSearch, setNavBarRight, setnavBarLeft }) {
               },
 
               "&:hover .arrow-icon": {
-                transform: "rotate(180deg)",
+                transform: "rotateX(180deg)",
               },
               "&:hover button::after": {
                 transform: "scaleX(1)",
@@ -390,7 +403,7 @@ export default function Nav({ setOpenSearch, setNavBarRight, setnavBarLeft }) {
                   left: 0,
                   bottom: -4,
                   width: "100%",
-                  height: "4px",
+                  height: "3px",
                   backgroundImage:
                     "linear-gradient(45deg, #f7931e, #d63384, #6f42c1)",
                   transform: "scaleX(0)",
@@ -421,12 +434,12 @@ export default function Nav({ setOpenSearch, setNavBarRight, setnavBarLeft }) {
                 position: "absolute",
                 top: "100%",
                 left: 0,
-                minWidth: "180px",
+                minWidth: "225px",
                 marginTop: "30px",
                 backgroundColor: "white",
                 borderRadius: "10px",
                 boxShadow: "0px 10px 30px rgba(0,0,0,0.1)",
-                padding: "10px 0",
+                padding: "10px 0 10px 15px",
                 opacity: 0,
                 visibility: "hidden",
                 transform: "translateY(10px)",
@@ -462,14 +475,14 @@ export default function Nav({ setOpenSearch, setNavBarRight, setnavBarLeft }) {
                     <CircleIcon
                       sx={{
                         fontSize: "6px",
-                        color: "purple",
+                        color: "#6565b7",
                         transform: "translateY(-3.5px)",
                       }}
                     />
                     <CircleIcon
                       sx={{
                         fontSize: "6px",
-                        color: "#6f42c1",
+                        color: "#6565b7",
                         transform: "translateY(-3.5px)",
                       }}
                     />
@@ -497,7 +510,7 @@ export default function Nav({ setOpenSearch, setNavBarRight, setnavBarLeft }) {
               },
 
               "&:hover .arrow-icon": {
-                transform: "rotate(180deg)",
+                transform: "rotateX(180deg)",
               },
               "&:hover button::after": {
                 transform: "scaleX(1)",
@@ -519,7 +532,7 @@ export default function Nav({ setOpenSearch, setNavBarRight, setnavBarLeft }) {
                   left: 0,
                   bottom: -4,
                   width: "100%",
-                  height: "4px",
+                  height: "3px",
                   backgroundImage:
                     "linear-gradient(45deg, #f7931e, #d63384, #6f42c1)",
                   transform: "scaleX(0)",
@@ -550,12 +563,12 @@ export default function Nav({ setOpenSearch, setNavBarRight, setnavBarLeft }) {
                 position: "absolute",
                 top: "100%",
                 left: 0,
-                minWidth: "180px",
+                minWidth: "225px",
                 marginTop: "30px",
                 backgroundColor: "white",
                 borderRadius: "10px",
                 boxShadow: "0px 10px 30px rgba(0,0,0,0.1)",
-                padding: "10px 0",
+                padding: "10px 0 10px 15px",
                 opacity: 0,
                 visibility: "hidden",
                 transform: "translateY(10px)",
@@ -590,14 +603,14 @@ export default function Nav({ setOpenSearch, setNavBarRight, setnavBarLeft }) {
                     <CircleIcon
                       sx={{
                         fontSize: "6px",
-                        color: "purple",
+                        color: "#6565b7",
                         transform: "translateY(-3.5px)",
                       }}
                     />
                     <CircleIcon
                       sx={{
                         fontSize: "6px",
-                        color: "#6f42c1",
+                        color: "#6565b7",
                         transform: "translateY(-3.5px)",
                       }}
                     />
@@ -625,7 +638,7 @@ export default function Nav({ setOpenSearch, setNavBarRight, setnavBarLeft }) {
               },
 
               "&:hover .arrow-icon": {
-                transform: "rotate(180deg)",
+                transform: "rotateX(180deg)",
               },
               "&:hover button::after": {
                 transform: "scaleX(1)",
@@ -647,7 +660,7 @@ export default function Nav({ setOpenSearch, setNavBarRight, setnavBarLeft }) {
                   left: 0,
                   bottom: -4,
                   width: "100%",
-                  height: "4px",
+                  height: "3px",
                   backgroundImage:
                     "linear-gradient(45deg, #f7931e, #d63384, #6f42c1)",
                   transform: "scaleX(0)",
@@ -678,12 +691,12 @@ export default function Nav({ setOpenSearch, setNavBarRight, setnavBarLeft }) {
                 position: "absolute",
                 top: "100%",
                 left: 0,
-                minWidth: "180px",
+                minWidth: "225px",
                 marginTop: "30px",
                 backgroundColor: "white",
                 borderRadius: "10px",
                 boxShadow: "0px 10px 30px rgba(0,0,0,0.1)",
-                padding: "10px 0",
+                padding: "10px 0 10px 15px",
                 opacity: 0,
                 visibility: "hidden",
                 transform: "translateY(10px)",
@@ -718,14 +731,14 @@ export default function Nav({ setOpenSearch, setNavBarRight, setnavBarLeft }) {
                       <CircleIcon
                         sx={{
                           fontSize: "6px",
-                          color: "purple",
+                          color: "#6565b7",
                           transform: "translateY(-3.5px)",
                         }}
                       />
                       <CircleIcon
                         sx={{
                           fontSize: "6px",
-                          color: "#6f42c1",
+                          color: "#6565b7",
                           transform: "translateY(-3.5px)",
                         }}
                       />
@@ -754,7 +767,7 @@ export default function Nav({ setOpenSearch, setNavBarRight, setnavBarLeft }) {
               },
 
               "&:hover .arrow-icon": {
-                transform: "rotate(180deg)",
+                transform: "rotateX(180deg)",
               },
               "&:hover button::after": {
                 transform: "scaleX(1)",
@@ -776,7 +789,7 @@ export default function Nav({ setOpenSearch, setNavBarRight, setnavBarLeft }) {
                   left: 0,
                   bottom: -4,
                   width: "100%",
-                  height: "4px",
+                  height: "3px",
                   backgroundImage:
                     "linear-gradient(45deg, #f7931e, #d63384, #6f42c1)",
                   transform: "scaleX(0)",
@@ -807,12 +820,13 @@ export default function Nav({ setOpenSearch, setNavBarRight, setnavBarLeft }) {
                 position: "absolute",
                 top: "100%",
                 left: 0,
-                minWidth: "180px",
+                minWidth: "225px",
                 marginTop: "30px",
                 backgroundColor: "white",
                 borderRadius: "10px",
+                paddingLeft: "20px",
                 boxShadow: "0px 10px 30px rgba(0,0,0,0.1)",
-                padding: "10px 0",
+                padding: "10px 0 10px 15px",
                 opacity: 0,
                 visibility: "hidden",
                 transform: "translateY(10px)",
@@ -842,14 +856,14 @@ export default function Nav({ setOpenSearch, setNavBarRight, setnavBarLeft }) {
                     <CircleIcon
                       sx={{
                         fontSize: "6px",
-                        color: "purple",
+                        color: "#6565b7",
                         transform: "translateY(-3.5px)",
                       }}
                     />
                     <CircleIcon
                       sx={{
                         fontSize: "6px",
-                        color: "#6f42c1",
+                        color: "#6565b7",
                         transform: "translateY(-3.5px)",
                       }}
                     />
@@ -867,15 +881,20 @@ export default function Nav({ setOpenSearch, setNavBarRight, setnavBarLeft }) {
           </Box>
         </Stack>
 
+          <Divider
+            orientation="vertical"
+            flexItem
+            sx={{ display: { xs: "none", lg: "block" } }}
+          />
         {/**phone phooto */}
         <Box sx={{ display: { xs: "none", lg: "block" } }}>
-          <img src="/download.svg" />
+          <img
+            src="/imgi_89_default.png"
+            alt=""
+            style={{ width: "40px", height: "40px" }}
+            className="imagePhoneNAv"
+          />
         </Box>
-        <Divider
-          orientation="vertical"
-          flexItem
-          sx={{ display: { xs: "none", lg: "block" } }}
-        />
         {/** call number */}
         <Box sx={{ display: { xs: "none", lg: "block" } }}>
           <Typography>Call us 24/7</Typography>
@@ -892,6 +911,7 @@ export default function Nav({ setOpenSearch, setNavBarRight, setnavBarLeft }) {
             borderRadius: "50%",
             width: "40px",
             height: "40px",
+            cursor: "pointer",
           }}
         >
           <SearchIcon
