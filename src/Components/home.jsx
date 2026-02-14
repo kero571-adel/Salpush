@@ -107,7 +107,6 @@ export default function Home() {
           <div className="hero-right">
             {/* Main Girl */}
             <img src="/girl.png" className="main-image" alt="girl" />
-
             {/* Floating Images */}
             <img src="/google.png" className="float-img google" alt="" />
             <img src="/chat.png" className="float-img chat" alt="" />
