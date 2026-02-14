@@ -1,34 +1,32 @@
-import { 
-    Box, 
-    TextField, 
-    IconButton, 
-    Stack, 
-    ClickAwayListener 
-  } from "@mui/material";
-  import SearchIcon from "@mui/icons-material/Search";
-  import { useState } from "react";
-  
-  export default function Search() {
-    const [open, setOpen] = useState(true);
-  
-    if (!open) return null; // يقفل بالكامل
-  
-    return (
-      <Box
-        sx={{
-          position: "fixed",
-          width: "100%",
-          height: "100vh",
-          background: "#8859a685",
-          zIndex: 100000000,
-          top: 0,
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "flex-start",
-          transition: "all 0.4s ease",
-        }}
-      >
-        <ClickAwayListener onClickAway={() => setOpen(false)}>
+import React from "react";
+import {
+  Box,
+  TextField,
+  IconButton,
+  Stack,
+  ClickAwayListener,
+} from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
+export default function Search({ openSearch, setOpenSearch }) {
+  console.log("openSearch: ", openSearch);
+  return (
+    <Box
+      sx={{
+        position: "fixed",
+        width: "100%",
+        height: openSearch ? "100vh" : "0px",
+        background: "#221f3fe0",
+        zIndex: 100000000,
+        top: 0,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "flex-start",
+        transition: "height 0.3s ease",
+        overflow: "hidden",
+      }}
+    >
+      <ClickAwayListener onClickAway={() => setOpenSearch(false)}>
+        <Box sx={{ width: "100%" }}>
           <Stack
             sx={{
               width: "100%",
@@ -39,12 +37,7 @@ import {
               alignItems: "center",
             }}
           >
-            <Box
-              sx={{
-                display: "flex",
-                width: "70%",
-              }}
-            >
+            <Box sx={{ display: "flex", width: "70%" }}>
               <TextField
                 fullWidth
                 placeholder="Enter Keywords..."
@@ -53,9 +46,7 @@ import {
                   "& .MuiOutlinedInput-root": {
                     backgroundColor: "#e9e9ee",
                     borderRadius: 0,
-                    "& fieldset": {
-                      border: "none",
-                    },
+                    "& fieldset": { border: "none" },
                   },
                   "& input": {
                     padding: "18px",
@@ -64,24 +55,21 @@ import {
                   },
                 }}
               />
-  
               <IconButton
                 sx={{
                   backgroundColor: "#f7931e",
                   color: "#fff",
                   borderRadius: 0,
                   width: 70,
-                  "&:hover": {
-                    backgroundColor: "#e6820d",
-                  },
+                  "&:hover": { backgroundColor: "#e6820d" },
                 }}
               >
                 <SearchIcon />
               </IconButton>
             </Box>
           </Stack>
-        </ClickAwayListener>
-      </Box>
-    );
-  }
-  
+        </Box>
+      </ClickAwayListener>
+    </Box>
+  );
+}
